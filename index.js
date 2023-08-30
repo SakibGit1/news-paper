@@ -1,10 +1,13 @@
 const handleCategory = async () => {
-    const res = await fetch(`https://openapi.programming-hero.com/api/news/categories`);
+    const res = await fetch(`https://openapi.programming-hero.com/api/news/categories`)
     const data = await res.json();
     // console.log(data.data.news_category);
     const categories = data.data.news_category.slice(0, 3);
-
+    
     const tadContainer = document.getElementById('tab-container');
+    // tadContainer = "";
+    
+
 
     categories.forEach((category) => {
         // console.log(category);
@@ -12,24 +15,28 @@ const handleCategory = async () => {
         div.innerHTML = `
         <a onclick="handleLoadNews('${category.category_id}')" class="text-xl font-semibold" href="">${category.category_name}</a>
       
-        `
+        `;
         tadContainer.appendChild(div)
 
-    });
+    })
 
-};
+}
 // news box container content
+
+
+
 const handleLoadNews = async (categoryId) => {
-    // console.log(categoryId);
+    console.log(categoryId);
     const res = await fetch(`https://openapi.programming-hero.com/api/news/category/${categoryId}`);
     const data = await res.json();
-    // console.log(data);
+    console.log(data);
+    const newsData = data.data;
 
     const cardContainer = document.getElementById('card-container');
-    cardContainer.innerHTML = "";
+    // cardContainer.innerHTML = "";
 
-    data.data?.forEach((news) => {
-        console.log(news);
+    newsData.forEach((news) => {
+        // console.log(news);
         const div = document.createElement('div');
         div.innerHTML = `
             <div class="card bg-base-100 shadow-xl">
@@ -76,4 +83,4 @@ const handleLoadNews = async (categoryId) => {
 
 
 handleCategory();
-handleLoadNews('01')
+// handleLoadNews()
