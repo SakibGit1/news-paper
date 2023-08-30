@@ -13,14 +13,14 @@ const handleCategory = async () => {
         // console.log(category);
         const div = document.createElement('div');
         div.innerHTML = `
-        <a onclick="handleLoadNews('${category.category_id}')" class="text-xl font-semibold" href="">${category.category_name}</a>
+        <a onclick="handleLoadNews('${category.category_id}')" class="text-xl font-semibold" href="#">${category.category_name}</a>
       
         `;
         tadContainer.appendChild(div)
 
-    })
+    });
 
-}
+};
 // news box container content
 
 
@@ -57,7 +57,7 @@ const handleLoadNews = async (categoryId) => {
                   
             </div>
            <div>
-           <h6>${news.author?.name.slice(0,6)}</h6>
+          <h6>${news?.author?.name?.slice(0,5)}</h6>
            
            </div>
   
@@ -83,4 +83,4 @@ const handleLoadNews = async (categoryId) => {
 
 
 handleCategory();
-// handleLoadNews()
+handleLoadNews('01');
