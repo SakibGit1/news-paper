@@ -96,7 +96,7 @@ const showModal = async (newId) =>{
   <form method="dialog" class="modal-box">
   <img src="${modalId.image_url}" />
     <h3 class="font-bold text-lg">${modalId.title}</h3>
-    <p class="py-4">Press ESC key or click the button below to close</p>
+    <p class="py-4">${modalId.details}</p>
     <div class="modal-action">
       <!-- if there is a button in form, it will close the modal -->
       <button class="btn">Close</button>
