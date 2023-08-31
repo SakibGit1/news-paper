@@ -26,16 +26,17 @@ const handleCategory = async () => {
 
 
 const handleLoadNews = async (categoryId) => {
-    console.log(categoryId);
+    // console.log(categoryId);
     const res = await fetch(`https://openapi.programming-hero.com/api/news/category/${categoryId}`);
     const data = await res.json();
-    console.log(data);
+    // console.log(data);
     const newsData = data.data;
+    const s =  newsData.sort((a, b) => a.total_view - b.total_view);
 
     const cardContainer = document.getElementById('card-container');
     cardContainer.innerHTML = "";
 
-    newsData.forEach((news) => {
+    s.forEach((news) => {
         // console.log(news);
         const div = document.createElement('div');
         div.innerHTML = `
@@ -65,7 +66,7 @@ const handleLoadNews = async (categoryId) => {
              </div>
 
              <div>
-             <button class="btn bg-blue-100">Details</button>
+             <button onclick="showModal('${news._id}')" class="btn bg-blue-100">Details</button>
              </div>
             </div>
             </div>
@@ -80,7 +81,35 @@ const handleLoadNews = async (categoryId) => {
 
 }
 
+const showModal = async (newId) =>{
+    // console.log(newId);
+    const res = await fetch(`https://openapi.programming-hero.com/api/news/${newId}`)
+    const data = await res.json()
+    console.log(data.data[0]);
+    const modalId = data.data[0];
+    const modalBx = document.getElementById('my_modal_5');
+    modalBx.innerHTML = `
+    
+    
 
+
+  <form method="dialog" class="modal-box">
+  <img src="${modalId.image_url}" />
+    <h3 class="font-bold text-lg">${modalId.title}</h3>
+    <p class="py-4">Press ESC key or click the button below to close</p>
+    <div class="modal-action">
+      <!-- if there is a button in form, it will close the modal -->
+      <button class="btn">Close</button>
+    </div>
+  </form>
+
+    
+    
+    `;
+    my_modal_5.showModal()
+
+
+}
 
 handleCategory();
 handleLoadNews('01');
