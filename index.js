@@ -2,7 +2,7 @@ const handleCategory = async () => {
     const res = await fetch(`https://openapi.programming-hero.com/api/news/categories`)
     const data = await res.json();
     // console.log(data.data.news_category);
-    const categories = data.data.news_category.slice(0, 3);
+    const categories = data.data.news_category.slice(0, 4);
     
     const tadContainer = document.getElementById('tab-container');
     // tadContainer = "";
@@ -33,7 +33,7 @@ const handleLoadNews = async (categoryId) => {
     const newsData = data.data;
 
     const cardContainer = document.getElementById('card-container');
-    // cardContainer.innerHTML = "";
+    cardContainer.innerHTML = "";
 
     newsData.forEach((news) => {
         // console.log(news);
